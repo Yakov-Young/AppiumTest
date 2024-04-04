@@ -1,21 +1,22 @@
-package ru.kemsu;
+package ru.kemsu.lib;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
 
-public class ConfigTest {
+public class ConfigTest extends TestCase {
+    protected AppiumDriver<WebElement> driver;
+    private static final String APPIUM_URL = "http://127.0.0.1:4723";
 
-
-    protected AppiumDriver driver;
-
-    @Before
-    public void setUp() throws Exception {
+    protected void setUp() throws Exception {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability("appium:platformName", "Android");
@@ -27,17 +28,14 @@ public class ConfigTest {
         capabilities.setCapability("app",
                 "C:\\Users\\Sibiryakov\\IdeaProjects\\wikiAppium\\apks\\org.wikipedia-50479.apk");
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), capabilities);
+        driver = new AndroidDriver<>(new URL(APPIUM_URL), capabilities);
     }
 
-    @After
-    public void tearDown() {
+    protected void tearDown() {
         //driver.quit();
     }
 
-    @Test
-    public void firstTest() {
+    protected void firstTest() {
         System.out.println("run testing");
-        ToolForTesting tool = new ToolForTesting(driver);
     }
 }
