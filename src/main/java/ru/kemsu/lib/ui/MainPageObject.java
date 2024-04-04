@@ -20,16 +20,14 @@ public class MainPageObject {
         return driverWait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    public WebElement waitForElementAndClick(By by, String error_message, long timeoutInSecond) {
+    public void waitForElementAndClick(By by, String error_message, long timeoutInSecond) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSecond);
         element.click();
-        return element;
     }
 
-    public WebElement waitForElementAndSendKey(By by, String keys, String error_message, long timeoutInSecond) {
+    public void waitForElementAndSendKey(By by, String keys, String error_message, long timeoutInSecond) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSecond);
         element.sendKeys(keys);
-        return element;
     }
 }
 

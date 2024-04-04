@@ -3,22 +3,19 @@ package ru.kemsu;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import ru.kemsu.lib.ConfigTest;
 import ru.kemsu.lib.ui.MainPageObject;
 import ru.kemsu.lib.ui.SearchPageObject;
-
-import java.beans.Transient;
 
 public class WikiTest extends ConfigTest {
 
     private MainPageObject tool;
 
     @Test
-    public void testFirstTest() {
+    public void testFirst() {
         super.firstTest();
 
-        MainPageObject tool = new MainPageObject(super.driver);
+        tool = new MainPageObject(super.driver);
 
         tool.waitForElementAndClick(By.xpath("//*[contains(@text, 'Пропустить')]"),
                 "Не возможно нажать на кнопку 'Пропустить'", 2);
@@ -48,5 +45,34 @@ public class WikiTest extends ConfigTest {
         pageObject.initSearchInput();
         pageObject.typeSearchLine("Кемеровский государственный университет");
         pageObject.waitForSearchResult("высшее учебное заведение в Кемерове");
+    }
+
+    @Test
+    public void testTaskToComplete() {
+        SearchPageObject pageObject = new SearchPageObject(driver);
+
+        pageObject.passFirstPage();
+
+        //Ввод текста в строке поиска
+        pageObject.initSearchInput();
+        pageObject.typeSearchLine("Хоббит, или Туда и обратно");
+
+        // Выбор соответствующей статьи
+        pageObject.waitForClickByText("повесть английского писателя Джона Р. Р. Толкина");
+
+        // Создание нового списка для чткения
+        pageObject.clickOnFavoriteElement();
+        pageObject.clickOnAddReadingList();
+        pageObject.initAddReadingListInput();
+        pageObject.typeAddReadingListLine("Хоббит");
+        pageObject.waitForClickByText("ОК");
+
+        // Переход в список для чтения
+        pageObject.waitForClickByText("Посмотреть список");
+
+        // Удаления созданного списка
+        pageObject.clickOnActionElement();
+        pageObject.waitForClickByText("Удалить список");
+        pageObject.waitForClickByText("ОК");
     }
 }

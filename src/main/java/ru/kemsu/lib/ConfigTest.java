@@ -3,10 +3,6 @@ package ru.kemsu.lib;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -32,7 +28,7 @@ public class ConfigTest extends TestCase {
     }
 
     protected void tearDown() {
-        //driver.quit();
+        driver.quit();
     }
 
     protected void firstTest() {
